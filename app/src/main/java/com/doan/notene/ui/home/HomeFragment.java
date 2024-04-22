@@ -1,37 +1,30 @@
-package com.doan.notene.ui.home;
+package com.doan.notene.ui.home
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import com.doan.notene.databinding.FragmentHomeBinding
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
+class HomeFragment : Fragment() {
 
-import com.doan.notene.databinding.FragmentHomeBinding;
+    private lateinit var binding: FragmentHomeBinding
+    private lateinit var homeViewModel: HomeViewModel
 
-public class HomeFragment extends Fragment {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
+        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-    private FragmentHomeBinding binding;
+        homeViewModel.text.observe(viewLifecycleOwner, Observer { text ->
+            binding.textHome.text = text
+        })
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+        return binding.root
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }
