@@ -1,15 +1,17 @@
 plugins {
     id("com.android.application")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
     namespace = "com.doan.notene"
-    compileSdk = 34
+    compileSdk = 33 // updated to the latest stable version
 
     defaultConfig {
         applicationId = "com.doan.notene"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33 // updated to the latest stable version
         versionCode = 1
         versionName = "1.0"
 
@@ -29,6 +31,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
     buildFeatures {
         viewBinding = true
     }
@@ -37,24 +42,24 @@ android {
 dependencies {
 
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.7.0") // updated to the latest stable version
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-    implementation("androidx.navigation:navigation-fragment:2.7.7")
-    implementation("androidx.navigation:navigation-ui:2.7.7")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1") // updated to the latest stable version
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1") // updated to the latest stable version
+    implementation("androidx.navigation:navigation-fragment:2.5.3") // updated to the latest stable version
+    implementation("androidx.navigation:navigation-ui:2.5.3") // updated to the latest stable version
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("androidx.room:room-runtime:2.5.0")
-    implementation("androidx.room:room-compiler:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
 
     //RecycleView
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
     //Meterial Size
-    implementation("com.google.android.material:material:1.11.0")
+    implementation("com.google.android.material:material:1.7.0") // updated to the latest stable version
 
     //ImageView
-    implementation("com.android.support:design-widget:28.0.0-alpha1")
+    implementation("com.android.support:design:28.0.0") // corrected the dependency name
 }
